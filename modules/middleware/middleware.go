@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	"github.com/adwinugroho/simple-wedding-management/internals/logger"
+	"github.com/adwinugroho/wedding-management-system/internals/logger"
 	"github.com/labstack/echo/v4"
 )
 

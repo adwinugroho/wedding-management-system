@@ -1,4 +1,4 @@
-module github.com/adwinugroho/simple-wedding-management
+module github.com/adwinugroho/wedding-management-system
 
 go 1.23.3
 

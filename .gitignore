@@ -1,3 +1,5 @@
 .env
 config/config.yaml
 config/config.prod.yaml
+
+.DS_Store

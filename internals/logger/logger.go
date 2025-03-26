@@ -4,6 +4,7 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/adwinugroho/wedding-management-system/internals/helpers"
 	"github.com/sirupsen/logrus"
 )
 
@@ -16,56 +17,62 @@ func InitLogger() *logrus.Logger {
 	return globalLogger
 }
 
-func getCallerInfo() (string, int) {
+func getCallerInfo() (string, string, int) {
 	_, file, line, ok := runtime.Caller(2) // 2 to skip the logger function itself
 	if !ok {
-		return "unknown", 0
+		return "", "", 0
 	}
-	return filepath.Base(file), line
+	return helpers.TimeHostNow("Asia/Jakarta").Format("2006-01-02 15:04:05"), filepath.Base(file), line
 }
 
 func LogInfo(message string) {
-	file, line := getCallerInfo()
+	time, file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
+		"time": time,
 		"file": file,
 		"line": line,
 	}).Info(message)
 }
 
 func LogWarn(message string) {
-	file, line := getCallerInfo()
+	time, file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
+		"time": time,
 		"file": file,
 		"line": line,
 	}).Warn(message)
 }
 
 func LogError(message string) {
-	file, line := getCallerInfo()
+	time, file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
+		"time": time,
 		"file": file,
 		"line": line,
 	}).Error(message)
 }
 
 func LogFatal(message string) {
-	file, line := getCallerInfo()
+	time, file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
+		"time": time,
 		"file": file,
 		"line": line,
 	}).Fatal(message)
 }
 
 func LogPanic(message string) {
-	file, line := getCallerInfo()
+	time, file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
+		"time": time,
 		"file": file,
 		"line": line,
 	}).Panic(message)
 }
 
 func LogWithFields(fields logrus.Fields, message string) {
-	file, line := getCallerInfo()
+	time, file, line := getCallerInfo()
+	fields["time"] = time
 	fields["file"] = file
 	fields["line"] = line
 	globalLogger.WithFields(fields).Info(message)
