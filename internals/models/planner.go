@@ -24,22 +24,24 @@ type (
 	}
 
 	Venue struct {
-		VenueName       string `json:"venue_name"`
-		VenueType       string `json:"venue_type"` // hotel/restaurant/other
-		Location        string `json:"location"`
-		Capacity        int    `json:"capacity"`
-		Price           int    `json:"price"`
-		PaymentStatus   string `json:"payment_status"`   // paid/unpaid/pending
-		PaymentDeadline string `json:"payment_deadline"` // 2025-01-01
+		VenueName       string         `json:"venue_name"`
+		VenueType       string         `json:"venue_type"` // hotel/restaurant/other
+		Location        string         `json:"location"`
+		Capacity        int            `json:"capacity"`
+		Price           int            `json:"price"`
+		PaymentStatus   string         `json:"payment_status"`   // paid/unpaid/pending
+		PaymentDeadline string         `json:"payment_deadline"` // 2025-01-01
+		IncludeSetup    map[string]any `json:"include_setup"`
 	}
 
 	Catering struct {
-		Pax             int    `json:"pax"`
-		Buffet          int    `json:"buffet"`           // prasmanan
-		Price           int    `json:"price"`            // total price
-		PaymentStatus   string `json:"payment_status"`   // paid/unpaid/pending
-		PaymentDeadline string `json:"payment_deadline"` // 2025-01-01
-		Menu            []Menu `json:"menu"`
+		Pax             int            `json:"pax"`
+		Buffet          int            `json:"buffet"`           // prasmanan
+		Price           int            `json:"price"`            // total price
+		PaymentStatus   string         `json:"payment_status"`   // paid/unpaid/pending
+		PaymentDeadline string         `json:"payment_deadline"` // 2025-01-01
+		Menu            []Menu         `json:"menu"`
+		IncludeSetup    map[string]any `json:"include_setup"`
 	}
 
 	Menu struct {
@@ -48,13 +50,14 @@ type (
 	}
 
 	Entertainment struct {
-		Performer       []Performer `json:"performer"`
-		SoundSystem     bool        `json:"sound_system"`
-		MasterCeremony  bool        `json:"mc"`
-		Duration        int         `json:"duration"`         // in hour
-		Price           int         `json:"price"`            // total price
-		PaymentStatus   string      `json:"payment_status"`   // paid/unpaid/pending
-		PaymentDeadline string      `json:"payment_deadline"` // 2025-01-01
+		Performer       []Performer    `json:"performer"`
+		SoundSystem     bool           `json:"sound_system"`
+		MasterCeremony  bool           `json:"mc"`
+		Duration        int            `json:"duration"`         // in hour
+		Price           int            `json:"price"`            // total price
+		PaymentStatus   string         `json:"payment_status"`   // paid/unpaid/pending
+		PaymentDeadline string         `json:"payment_deadline"` // 2025-01-01
+		IncludeSetup    map[string]any `json:"include_setup"`
 	}
 
 	Performer struct {

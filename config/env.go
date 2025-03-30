@@ -8,16 +8,27 @@ import (
 )
 
 type EnvAppConfig struct {
-	Port string `mapstructure:"app_port"`
+	AppVersion  string `mapstructure:"app_version"`
+	AppName     string `mapstructure:"app_name"`
+	Port        string `mapstructure:"app_port"`
+	Environment string `mapstructure:"environment"`
+}
+
+type EnvSSOConfig struct {
+	GoogleClientID     string `mapstructure:"sso_google_client_id"`
+	GoogleClientSecret string `mapstructure:"sso_google_client_secret"`
+	GoogleRedirectURL  string `mapstructure:"sso_google_redirect_url"`
 }
 
 var (
 	AppConfig EnvAppConfig
+	SSOConfig EnvSSOConfig
 )
 
 var configStruct = map[string]interface{}{
-	"app-config": &AppConfig,
-	// "postgresql-config": &PostgreSQLConfig,
+	"app-config":        &AppConfig,
+	"postgresql-config": &PostgreSQLConfig,
+	"sso-config":        &SSOConfig,
 }
 
 func LoadConfig() {
