@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"log"
 
 	"github.com/adwinugroho/wedding-management-system/config"
+	"github.com/adwinugroho/wedding-management-system/internals/logger"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -41,7 +41,7 @@ func GetGoogleOAuthToken(code string, ctx context.Context) (*oauth2.Token, error
 func GetGoogleOAuthUserInfo(token *oauth2.Token, ctx context.Context) (*GoogleUserInfo, error) {
 	resp, err := googleOAuthConfig.Client(ctx, token).Get("https://www.googleapis.com/oauth2/v3/userinfo")
 	if err != nil {
-		log.Println("Error get google user info, cause:", err)
+		logger.LogError("Error get google user info, cause:" + err.Error())
 		return nil, err
 	}
 
@@ -49,14 +49,14 @@ func GetGoogleOAuthUserInfo(token *oauth2.Token, ctx context.Context) (*GoogleUs
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Println("Error read google user info, cause:", err)
+		logger.LogError("Error read google user info, cause:" + err.Error())
 		return nil, err
 	}
 
 	var userInfo GoogleUserInfo
 	err = json.Unmarshal(body, &userInfo)
 	if err != nil {
-		log.Println("Error unmarshal google user info, cause:", err)
+		logger.LogError("Error unmarshal google user info, cause:" + err.Error())
 		return nil, err
 	}
 

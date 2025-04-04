@@ -1,76 +1,75 @@
 package logger
 
 import (
+	"fmt"
 	"path/filepath"
 	"runtime"
 	"strconv"
-	"time"
 
 	"github.com/sirupsen/logrus"
 )
 
 var globalLogger *logrus.Logger
 
-func InitLogger() *logrus.Logger {
+func InitLogger() {
 	globalLogger = logrus.New()
 	formatter := &logrus.JSONFormatter{
 		TimestampFormat: "2006-01-02 15:04:05",
 		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
 			return "", filepath.Base(f.File) + ":" + strconv.Itoa(f.Line)
 		},
+		DisableHTMLEscape: true,
 	}
 	globalLogger.SetFormatter(formatter)
-	globalLogger.SetReportCaller(true)
 	globalLogger.SetLevel(logrus.InfoLevel)
-	return globalLogger
 }
 
-func getCallerInfo() (string, string, int) {
+func getCallerInfo() (string, int) {
 	_, file, line, ok := runtime.Caller(2)
 	if !ok {
-		return "", "", 0
+		return "", 0
 	}
-	loc, _ := time.LoadLocation("Asia/Jakarta")
-	return time.Now().In(loc).Format("2006-01-02 15:04:05"), filepath.Base(file), line
+
+	return filepath.Base(file), line
 }
 
 func LogInfo(message string) {
-	time, _, _ := getCallerInfo()
+	file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
-		"time": time,
+		"file": fmt.Sprintf("%s:%d", file, line),
 	}).Info(message)
 }
 
 func LogWarn(message string) {
-	time, _, _ := getCallerInfo()
+	file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
-		"time": time,
+		"file": fmt.Sprintf("%s:%d", file, line),
 	}).Warn(message)
 }
 
 func LogError(message string) {
-	time, _, _ := getCallerInfo()
+	file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
-		"time": time,
+		"file": fmt.Sprintf("%s:%d", file, line),
 	}).Error(message)
 }
 
 func LogFatal(message string) {
-	time, _, _ := getCallerInfo()
+	file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
-		"time": time,
+		"file": fmt.Sprintf("%s:%d", file, line),
 	}).Fatal(message)
 }
 
 func LogPanic(message string) {
-	time, _, _ := getCallerInfo()
+	file, line := getCallerInfo()
 	globalLogger.WithFields(logrus.Fields{
-		"time": time,
+		"file": fmt.Sprintf("%s:%d", file, line),
 	}).Panic(message)
 }
 
 func LogWithFields(fields logrus.Fields, message string) {
-	time, _, _ := getCallerInfo()
-	fields["time"] = time
+	file, line := getCallerInfo()
+	fields["file"] = fmt.Sprintf("%s:%d", file, line)
 	globalLogger.WithFields(fields).Info(message)
 }

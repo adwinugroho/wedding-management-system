@@ -1,8 +1,9 @@
 package helpers
 
 import (
-	"log"
 	"time"
+
+	"github.com/adwinugroho/wedding-management-system/internals/logger"
 )
 
 func TimeHostNow(tz string) time.Time {
@@ -10,7 +11,7 @@ func TimeHostNow(tz string) time.Time {
 	// check on this https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	location, err := time.LoadLocation(tz)
 	if err != nil {
-		log.Println("Error get time, cause:" + err.Error())
+		logger.LogError("Error get time, cause:" + err.Error())
 	}
 	now := time.Now()
 	timeInLoc := now.In(location)

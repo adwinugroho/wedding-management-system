@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/adwinugroho/wedding-management-system/internals/logger"
@@ -43,12 +44,9 @@ func LoadConfig() {
 	}
 
 	for key, value := range configStruct {
-		log.Println("Loading config: ", key)
 		if err := viper.Unmarshal(value); err != nil {
-			log.Printf("Error loading config %s, cause: %+v\n", key, err)
-			log.Fatal(err)
+			logger.LogFatal(fmt.Sprintf("Error loading config %s, cause: %+v\n", key, err))
 		}
-		log.Printf("%s: %+v\n", key, value)
-		logger.LogInfo("Config loaded successfully")
+		logger.LogInfo(fmt.Sprintf("Config loaded successfully: %s, value: %+v", key, value))
 	}
 }

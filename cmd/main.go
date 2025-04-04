@@ -16,20 +16,22 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func main() {
+func init() {
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-	logger := logger.InitLogger()
+	logger.InitLogger()
 
 	config.LoadConfig()
+}
 
-	logger.Info("Starting application...")
-	logger.Info("Application started on port:", config.AppConfig.Port)
+func main() {
+	logger.LogInfo("Starting application...")
+	logger.LogInfo("Application started on port:" + config.AppConfig.Port)
 
 	ctx := context.Background()
 
 	dbPort, err := strconv.Atoi(config.PostgreSQLConfig.PostgreSQLPort)
 	if err != nil {
-		logger.Fatal("Failed to convert port to int:", err)
+		logger.LogFatal("Failed to convert port to int:" + err.Error())
 	}
 	dbHandler, err := config.InitConnectDB(
 		ctx,
@@ -40,7 +42,7 @@ func main() {
 		int32(dbPort),
 	)
 	if err != nil {
-		logger.Fatal("Failed to connect to database:", err)
+		logger.LogFatal("Failed to connect to database:" + err.Error())
 	}
 
 	var e = echo.New()

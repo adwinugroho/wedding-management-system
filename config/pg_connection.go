@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/adwinugroho/wedding-management-system/internals/logger"
@@ -39,8 +38,8 @@ func InitConnectDB(ctx context.Context, dbHost, dbUser, dbPass, dbName string, d
 
 	poolConfig, err := pgxpool.ParseConfig(dsn)
 	if err != nil {
-		log.Println("Failed to parse config:", err)
-		return nil, err
+		logger.LogFatal("Failed to parse config:" + err.Error())
+		// return nil, err
 	}
 
 	poolConfig.MaxConns = 100
@@ -51,14 +50,14 @@ func InitConnectDB(ctx context.Context, dbHost, dbUser, dbPass, dbName string, d
 
 	dbPool, err := pgxpool.NewWithConfig(ctx, poolConfig)
 	if err != nil {
-		log.Println("Failed to create pool:", err)
-		return nil, err
+		logger.LogFatal("Failed to create pool:" + err.Error())
+		// return nil, err
 	}
 
 	err = dbPool.Ping(ctx)
 	if err != nil {
-		log.Println("Failed to ping:", err)
-		return nil, err
+		logger.LogFatal("Failed to ping:" + err.Error())
+		// return nil, err
 	}
 
 	return &PostgresDB{DB: dbPool}, nil
