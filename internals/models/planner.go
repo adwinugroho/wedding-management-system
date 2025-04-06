@@ -7,6 +7,7 @@ type (
 		ID             string          `json:"id"`
 		BudgetType     string          `json:"budget_type"` // contract/engagement/reception
 		TotalGuest     int             `json:"total_guest"`
+		Document       []Document      `json:"document"`
 		Venue          *Venue          `json:"venue"`
 		Catering       *Catering       `json:"catering"`
 		Entertainment  *Entertainment  `json:"entertainment"`
@@ -126,5 +127,21 @@ type (
 		Price           int            `json:"price"`            // total price
 		PaymentStatus   string         `json:"payment_status"`   // paid/unpaid/pending
 		PaymentDeadline string         `json:"payment_deadline"` // 2025-01-01
+	}
+
+	Document struct {
+		DocumentName    string                `json:"document_name"` // Perlengkapan untuk KUA/Izin gedung dll.
+		DocumentType    string                `json:"document_type"` // pdf/image/video
+		DocumentURL     string                `json:"document_url"`
+		Price           int                   `json:"price"`            // total price
+		PaymentStatus   string                `json:"payment_status"`   // paid/unpaid/pending
+		PaymentDeadline string                `json:"payment_deadline"` // 2025-01-01
+		Requirement     []DocumentRequirement `json:"requirement"`      // KUA/Izin gedung dll.
+	}
+
+	DocumentRequirement struct {
+		Name     string `json:"name"`
+		Price    int    `json:"price"`
+		Quantity int    `json:"quantity"`
 	}
 )

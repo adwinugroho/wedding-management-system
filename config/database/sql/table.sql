@@ -174,5 +174,14 @@ CREATE TABLE wedding_organizer (
     contact_wo JSONB DEFAULT '{}'
 );
 
-
+CREATE TABLE document (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    document_name TEXT NOT NULL,
+    document_type VARCHAR(50) NOT NULL, -- pdf/image/video
+    document_url TEXT NOT NULL,
+    price INT NOT NULL,
+    payment_status VARCHAR(50) NOT NULL CHECK (payment_status IN ('paid', 'unpaid', 'pending')),
+    payment_deadline DATE,
+    requirement JSONB DEFAULT '{}' -- JSONB field
+);
 

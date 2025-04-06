@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"path/filepath"
 	"runtime"
-	"strconv"
 
 	"github.com/sirupsen/logrus"
 )
@@ -14,11 +13,9 @@ var globalLogger *logrus.Logger
 func InitLogger() {
 	globalLogger = logrus.New()
 	formatter := &logrus.JSONFormatter{
-		TimestampFormat: "2006-01-02 15:04:05",
-		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
-			return "", filepath.Base(f.File) + ":" + strconv.Itoa(f.Line)
-		},
+		TimestampFormat:   "2006-01-02 15:04:05",
 		DisableHTMLEscape: true,
+		PrettyPrint:       true,
 	}
 	globalLogger.SetFormatter(formatter)
 	globalLogger.SetLevel(logrus.InfoLevel)
