@@ -1,0 +1,1 @@
+// Alpine.js / Notus main JS placeholder

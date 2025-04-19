@@ -1,0 +1,148 @@
+/*! @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap'); */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional custom styles */
+#errorMessage {
+    color: red;
+    /* or any other color */
+    text-align: center;
+    margin-top: 0.5rem;
+    /* Adjust as needed */
+}
+
+.bg-blueGray-50 {
+    background-color: #f8fafc;
+}
+
+.bg-blueGray-100 {
+    background-color: #f1f5f9;
+}
+
+.bg-blueGray-200 {
+    background-color: #e2e8f0;
+}
+
+.bg-blueGray-300 {
+    background-color: #cbd5e1;
+}
+
+.bg-blueGray-400 {
+    background-color: #94a3b8;
+}
+
+.bg-blueGray-500 {
+    background-color: #64748b;
+}
+
+.bg-blueGray-600 {
+    background-color: #475569;
+}
+
+.bg-blueGray-700 {
+    background-color: #334155;
+}
+
+.bg-blueGray-800 {
+    background-color: #1e293b;
+}
+
+.bg-blueGray-900 {
+    background-color: #0f172a;
+}
+
+.text-blueGray-50 {
+    color: #f8fafc;
+}
+
+.text-blueGray-100 {
+    color: #f1f5f9;
+}
+
+.text-blueGray-200 {
+    color: #e2e8f0;
+}
+
+.text-blueGray-300 {
+    color: #cbd5e1;
+}
+
+.text-blueGray-400 {
+    color: #94a3b8;
+}
+
+.text-blueGray-500 {
+    color: #64748b;
+}
+
+.text-blueGray-600 {
+    color: #475569;
+}
+
+.text-blueGray-700 {
+    color: #334155;
+}
+
+.text-blueGray-800 {
+    color: #1e293b;
+}
+
+.text-blueGray-900 {
+    color: #0f172a;
+}
+
+.min-h-screen-75 {
+    min-height: 75vh;
+}
+
+.max-w-120-px {
+    max-width: 120px;
+}
+
+.h-70-px {
+    height: 70px;
+}
+
+.h-95-px {
+    height: 95px;
+}
+
+.-top-94-px {
+    top: -94px;
+}
+
+/* Main Colors */
+.bg-main-1 {
+    background-color: #c0737a;
+}
+
+.bg-main-2 {
+    background-color: #ffffff;
+}
+
+.text-main-1 {
+    color: #c0737a;
+}
+
+.text-main-2 {
+    color: #ffffff;
+}
+
+/* Side Colors */
+.bg-side-1 {
+    background-color: #3f3d56;
+}
+
+.bg-side-2 {
+    background-color: #f0f0f0;
+}
+
+.text-side-1 {
+    color: #3f3d56;
+}
+
+.text-side-2 {
+    color: #f0f0f0;
+}

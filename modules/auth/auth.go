@@ -8,6 +8,7 @@ import (
 func AuthRoutes(e *echo.Echo, authHandler handlers.AuthHandler, authGoogleHandler handlers.AuthGoogleHandler) {
 	authGroup := e.Group("/auth")
 	authGroup.POST("/login", authHandler.Login)
+	authGroup.GET("/login", authHandler.GetLogin)
 	// authGroup.POST("/logout", authHandler.Logout)
 	// authGroup.POST("/register", authHandler.Register)
 

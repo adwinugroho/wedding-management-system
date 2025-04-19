@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+@layer components {
+    .btn-primary {
+        @apply bg-side-1 text-white font-bold py-2 px-4 rounded;
+    }
+
+    .input-field {
+        @apply border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus: outline-none focus:ring w-full;
+    }
+}

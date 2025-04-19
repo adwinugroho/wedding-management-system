@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="{{ .StaticPath }}/assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ .StaticPath }}/assets/img/apple-icon.png" />
+    <link rel="stylesheet" href="{{ .StaticPath }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="{{ .StaticPath }}/assets/styles/tailwind.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://unpkg.com/htmx-ext-response-targets@2.0.2"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blueGray': {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        'main': {
+                            1: '#c0737a',
+                            2: '#ffffff',
+                        },
+                        'side': {
+                            1: '#3f3d56',
+                            2: '#f0f0f0',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <title>Login | Wedding Planner</title>
+</head>
+
+<body hx-ext="response-targets" class="text-blueGray-700 antialiased">
+    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
+        <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+            <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+                <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-side-1"
+                    href="/">Wedding Planner</a><button
+                    class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+                    type="button" onclick="toggleNavbar('example-collapse-navbar')">
+                    <i class="text-white fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <section class="relative w-full h-full py-40 min-h-screen">
+            <div class="absolute top-0 w-full h-full bg-white bg-cover bg-center bg-no-repeat"
+                style="background-image: url('{{ .StaticPath }}/assets/img/login-wedding-planner.png')">
+            </div>
+            <div class="container mx-auto px-4 h-full">
+                <div class="flex content-center items-center justify-center h-full">
+                    <div class="w-full lg:w-4/12 px-4">
+                        <div
+                            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+                            <div class="rounded-t mb-0 px-6 py-6">
+                                <div class="text-center mb-3">
+                                    <h6 class="text-blueGray-500 text-sm font-bold">
+                                        Sign in with
+                                    </h6>
+                                </div>
+                                <div class="btn-wrapper text-center">
+                                    <button
+                                        class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                                        type="button" onclick="window.location.href='/auth/google/login'">
+                                        <img alt="..." class="w-5 mr-1"
+                                            src="{{ .StaticPath }}/assets/img/google.svg" />Google</button>
+                                </div>
+                                <hr class="mt-6 border-b-1 border-blueGray-300" />
+                            </div>
+                            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                <div class="text-blueGray-400 text-center mb-3 font-bold">
+                                    <small>Or sign in with credentials</small>
+                                </div>
+                                <form id="loginForm" hx-post="/auth/login" hx-target-401="#errorMessage">
+                                    <div class="relative w-full mb-3">
+                                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            for="email">Email</label>
+                                        <input type="email" id="email" name="email"
+                                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            placeholder="Email" required />
+                                    </div>
+                                    <div class="relative w-full mb-3">
+                                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            for="password">Password</label>
+                                        <input type="password" id="password" name="password"
+                                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <div>
+                                        <label class="inline-flex items-center cursor-pointer">
+                                            <input id="rememberMe" type="checkbox"
+                                                class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" />
+                                            <span class="ml-2 text-sm font-semibold text-blueGray-600">Remember
+                                                me</span>
+                                        </label>
+                                    </div>
+                                    <div id="errorMessage" class="text-red-500 text-center text-sm mt-2"
+                                        style="display: block;"></div>
+                                    <div class="text-center mt-6">
+                                        <button
+                                            class="bg-side-1 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                            type="submit">
+                                            Sign In
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="flex flex-wrap mt-6">
+                                    <div class="w-1/2">
+                                        <a href="/auth/forgot-password"
+                                            class="text-side-1 hover:text-blueGray-800 text-sm font-semibold">
+                                            Forgot password?
+                                        </a>
+                                    </div>
+                                    <div class="w-1/2 text-right">
+                                        <a href="/auth/register"
+                                            class="text-side-1 hover:text-blueGray-800 text-sm font-semibold">
+                                            Create new account
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="absolute w-full bottom-0 bg-side-1 pb-6">
+                <div class="container mx-auto px-4">
+                    <hr class="mb-6 border-b-1 border-blueGray-600" />
+                    <div class="flex flex-wrap items-center md:justify-between justify-center">
+                        <div class="w-full md:w-4/12 px-4">
+                            <div class="text-sm text-white font-semibold py-1 text-center md:text-left">
+                                Copyright © <span id="get-current-year"></span>
+                                <a href="/"
+                                    class="text-white hover:text-blueGray-300 text-sm font-semibold py-1">Wedding
+                                    Planner</a>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-8/12 px-4">
+                            <ul class="flex flex-wrap list-none md:justify-end justify-center">
+                                <li>
+                                    <a href="/about"
+                                        class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">About
+                                        Us</a>
+                                </li>
+                                <li>
+                                    <a href="/services"
+                                        class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Our
+                                        Services</a>
+                                </li>
+                                <li>
+                                    <a href="/contact"
+                                        class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="/privacy-policy"
+                                        class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Privacy
+                                        Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </main>
+</body>
+<!-- Load dependencies first -->
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="{{ .StaticPath }}/assets/js/util.js"></script>
+
+</html>

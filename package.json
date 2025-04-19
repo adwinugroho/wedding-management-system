@@ -1,0 +1,25 @@
+{
+  "name": "simple-wedding-management",
+  "version": "1.0.0",
+  "description": "A modern web application for wedding planning and management, built with Go and HTMX. This application helps couples plan their wedding by managing budgets, guest lists, wedding rundowns, and finding wedding organizers in the JABODETABEK area.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./src/css/styles.css -o ./static/assets/styles/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./src/css/styles.css -o ./static/assets/styles/tailwind.css --watch",
+    "minify:js": "uglifyjs static/assets/js/util.js -o static/assets/js/util.js -c -m",
+    "watch:js": "nodemon --watch static/assets/js/util.js --exec 'npm run minify:js'",
+    "dev": "npm run watch:js & npm run watch:css",
+    "build": "npm run build:css && npm run minify:js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "nodemon": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "uglify-js": "latest"
+  }
+}
