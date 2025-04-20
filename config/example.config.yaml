@@ -1,6 +1,7 @@
 app_version: "0.0.1"
 app_name: "Simple-Wedding-Management"
 app_port: 9001
+app_url: "http://localhost"
 environment: "development"
 # Database
 db_host: "localhost"

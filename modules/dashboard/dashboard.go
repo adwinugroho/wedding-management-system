@@ -11,7 +11,7 @@ import (
 
 func DashboardRoutes(e *echo.Echo, dashboardHandler handlers.DashboardHandler) {
 	// Apply auth middleware to all dashboard routes
-	dashboardGroup := e.Group("/admin")
+	dashboardGroup := e.Group("/user")
 	// dashboardGroup.Use(CheckRole())
 
 	dashboardGroup.GET("/dashboard", dashboardHandler.GetDashboard)

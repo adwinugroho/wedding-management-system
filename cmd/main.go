@@ -32,6 +32,7 @@ func init() {
 func main() {
 	logger.LogInfo("Starting application...")
 	logger.LogInfo("Application started on port:" + config.AppConfig.Port)
+	logger.LogInfo("Application URL:" + config.AppConfig.AppURL)
 
 	parentCtx := context.Background()
 	ctx, cancel := context.WithTimeout(parentCtx, 60*time.Second)

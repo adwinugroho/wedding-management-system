@@ -51,7 +51,7 @@
         <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                 <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-side-1"
-                    href="/">Wedding Planner</a><button
+                    href="{{ .BaseURL }}">Wedding Planner</a><button
                     class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
                     type="button" onclick="toggleNavbar('example-collapse-navbar')">
                     <i class="text-white fas fa-bars"></i>
@@ -88,7 +88,8 @@
                                 <div class="text-blueGray-400 text-center mb-3 font-bold">
                                     <small>Or sign in with credentials</small>
                                 </div>
-                                <form id="loginForm" hx-post="/auth/login" hx-target-401="#errorMessage">
+                                <form id="loginForm" hx-post="{{ .BaseURL }}/auth/login"
+                                    hx-target-error="#errorMessage">
                                     <div class="relative w-full mb-3">
                                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                             for="email">Email</label>
@@ -100,6 +101,7 @@
                                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                             for="password">Password</label>
                                         <input type="password" id="password" name="password"
+                                            hx-on="htmx:afterRequest: this.value=''"
                                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             placeholder="Password" required />
                                     </div>
@@ -123,13 +125,13 @@
                                 </form>
                                 <div class="flex flex-wrap mt-6">
                                     <div class="w-1/2">
-                                        <a href="/auth/forgot-password"
+                                        <a href="{{ .BaseURL }}/auth/forgot-password"
                                             class="text-side-1 hover:text-blueGray-800 text-sm font-semibold">
                                             Forgot password?
                                         </a>
                                     </div>
                                     <div class="w-1/2 text-right">
-                                        <a href="/auth/register"
+                                        <a href="{{ .BaseURL }}/auth/register"
                                             class="text-side-1 hover:text-blueGray-800 text-sm font-semibold">
                                             Create new account
                                         </a>
@@ -155,21 +157,21 @@
                         <div class="w-full md:w-8/12 px-4">
                             <ul class="flex flex-wrap list-none md:justify-end justify-center">
                                 <li>
-                                    <a href="/about"
+                                    <a href="{{ .BaseURL }}/about"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">About
                                         Us</a>
                                 </li>
                                 <li>
-                                    <a href="/services"
+                                    <a href="{{ .BaseURL }}/services"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Our
                                         Services</a>
                                 </li>
                                 <li>
-                                    <a href="/contact"
+                                    <a href="{{ .BaseURL }}/contact"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Contact</a>
                                 </li>
                                 <li>
-                                    <a href="/privacy-policy"
+                                    <a href="{{ .BaseURL }}/privacy-policy"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Privacy
                                         Policy</a>
                                 </li>

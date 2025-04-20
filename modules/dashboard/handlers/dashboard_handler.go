@@ -1,8 +1,10 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/adwinugroho/wedding-management-system/config"
 	"github.com/adwinugroho/wedding-management-system/modules/auth/services"
 	"github.com/labstack/echo/v4"
 )
@@ -22,5 +24,6 @@ func NewDashboardHandler(authService services.AuthService) DashboardHandler {
 func (h *dashboardHandler) GetDashboard(c echo.Context) error {
 	return c.Render(http.StatusOK, "dashboard.html", map[string]any{
 		"StaticPath": "/static",
+		"BaseURL":    fmt.Sprintf("%s:%s/user/dashboard", config.AppConfig.AppURL, config.AppConfig.Port),
 	})
 }
