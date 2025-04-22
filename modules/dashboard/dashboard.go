@@ -26,32 +26,32 @@ func CheckRole() echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			authorizationHeader := c.Request().Header.Get("Authorization")
 			if authorizationHeader == "" {
-				return c.JSON(http.StatusUnauthorized, "Unauthorized")
+				return c.String(http.StatusUnauthorized, "Unauthorized")
 			}
 			token := strings.Split(authorizationHeader, " ")[1]
-			claims, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+			claims, err := jwt.Parse(token, func(token *jwt.Token) (any, error) {
 				return []byte("your-secret-key"), nil
 			})
 			if err != nil {
-				return c.JSON(http.StatusUnauthorized, "Unauthorized")
+				return c.String(http.StatusUnauthorized, "Unauthorized")
 			}
 
 			if claims == nil {
-				return c.JSON(http.StatusUnauthorized, "Unauthorized")
+				return c.String(http.StatusUnauthorized, "Unauthorized")
 			}
 
 			mapClaims, ok := claims.Claims.(jwt.MapClaims)
 			if !ok {
-				return c.JSON(http.StatusUnauthorized, "Unauthorized")
+				return c.String(http.StatusUnauthorized, "Unauthorized")
 			}
 
 			role, ok := mapClaims["role"].(string)
 			if !ok {
-				return c.JSON(http.StatusUnauthorized, "Unauthorized")
+				return c.String(http.StatusUnauthorized, "Unauthorized")
 			}
 
 			if role != "ADMIN" && role != "USER" {
-				return c.JSON(http.StatusUnauthorized, "Unauthorized")
+				return c.String(http.StatusUnauthorized, "Unauthorized")
 			}
 			return next(c)
 		}

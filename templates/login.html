@@ -50,19 +50,31 @@
     <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
         <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-                <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-side-1"
-                    href="{{ .BaseURL }}">Wedding Planner</a><button
+                <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+                    href="{{ .BaseURL }}">Home</a><button
                     class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
                     type="button" onclick="toggleNavbar('example-collapse-navbar')">
                     <i class="text-white fas fa-bars"></i>
                 </button>
+            </div>
+            <div class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden"
+                id="example-collapse-navbar">
+                <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
+                    <li class="flex items-center">
+                        <a href="{{ .BaseURL }}/auth/register"
+                            class="bg-white text-blueGray-700 active:bg-blueGray-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md inline-flex items-center">
+                            <i class="fas fa-arrow-circle-right"></i>
+                            Register
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
     <main>
         <section class="relative w-full h-full py-40 min-h-screen">
             <div class="absolute top-0 w-full h-full bg-white bg-cover bg-center bg-no-repeat"
-                style="background-image: url('{{ .StaticPath }}/assets/img/login-wedding-planner.png')">
+                style="background-image: url('{{ .StaticPath }}/assets/img/login-wedding-planner2.png')">
             </div>
             <div class="container mx-auto px-4 h-full">
                 <div class="flex content-center items-center justify-center h-full">
