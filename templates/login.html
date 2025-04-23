@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="shortcut icon" href="{{ .StaticPath }}/assets/img/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ .StaticPath }}/assets/img/apple-icon.png" />
-    <link rel="stylesheet" href="{{ .StaticPath }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="{{ .StaticPath }}/assets/styles/tailwind.css" />
+    <link rel="shortcut icon" href="{{ .staticPath }}/assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ .staticPath }}/assets/img/apple-icon.png" />
+    <link rel="stylesheet" href="{{ .staticPath }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="{{ .staticPath }}/assets/styles/tailwind.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="https://unpkg.com/htmx-ext-response-targets@2.0.2"></script>
@@ -51,7 +51,7 @@
         <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                 <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-                    href="{{ .BaseURL }}">Home</a><button
+                    href="{{ .baseURL }}">Home</a><button
                     class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
                     type="button" onclick="toggleNavbar('example-collapse-navbar')">
                     <i class="text-white fas fa-bars"></i>
@@ -61,7 +61,7 @@
                 id="example-collapse-navbar">
                 <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
                     <li class="flex items-center">
-                        <a href="{{ .BaseURL }}/auth/register"
+                        <a href="{{ .baseURL }}/auth/register"
                             class="bg-white text-blueGray-700 active:bg-blueGray-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md inline-flex items-center">
                             <i class="fas fa-arrow-circle-right"></i>
                             Register
@@ -74,7 +74,7 @@
     <main>
         <section class="relative w-full h-full py-40 min-h-screen">
             <div class="absolute top-0 w-full h-full bg-white bg-cover bg-center bg-no-repeat"
-                style="background-image: url('{{ .StaticPath }}/assets/img/login-wedding-planner2.png')">
+                style="background-image: url('{{ .staticPath }}/assets/img/login-wedding-planner2.png')">
             </div>
             <div class="container mx-auto px-4 h-full">
                 <div class="flex content-center items-center justify-center h-full">
@@ -92,7 +92,7 @@
                                         class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                                         type="button" onclick="window.location.href='/auth/google/login'">
                                         <img alt="..." class="w-5 mr-1"
-                                            src="{{ .StaticPath }}/assets/img/google.svg" />Google</button>
+                                            src="{{ .staticPath }}/assets/img/google.svg" />Google</button>
                                 </div>
                                 <hr class="mt-6 border-b-1 border-blueGray-300" />
                             </div>
@@ -100,7 +100,7 @@
                                 <div class="text-blueGray-400 text-center mb-3 font-bold">
                                     <small>Or sign in with credentials</small>
                                 </div>
-                                <form id="loginForm" hx-post="{{ .BaseURL }}/auth/login"
+                                <form id="loginForm" hx-post="{{ .baseURL }}/auth/login"
                                     hx-target-error="#errorMessage">
                                     <div class="relative w-full mb-3">
                                         <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -137,13 +137,13 @@
                                 </form>
                                 <div class="flex flex-wrap mt-6">
                                     <div class="w-1/2">
-                                        <a href="{{ .BaseURL }}/auth/forgot-password"
+                                        <a href="{{ .baseURL }}/auth/forgot-password"
                                             class="text-side-1 hover:text-blueGray-800 text-sm font-semibold">
                                             Forgot password?
                                         </a>
                                     </div>
                                     <div class="w-1/2 text-right">
-                                        <a href="{{ .BaseURL }}/auth/register"
+                                        <a href="{{ .baseURL }}/auth/register"
                                             class="text-side-1 hover:text-blueGray-800 text-sm font-semibold">
                                             Create new account
                                         </a>
@@ -169,21 +169,21 @@
                         <div class="w-full md:w-8/12 px-4">
                             <ul class="flex flex-wrap list-none md:justify-end justify-center">
                                 <li>
-                                    <a href="{{ .BaseURL }}/about"
+                                    <a href="{{ .baseURL }}/about"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">About
                                         Us</a>
                                 </li>
                                 <li>
-                                    <a href="{{ .BaseURL }}/services"
+                                    <a href="{{ .baseURL }}/services"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Our
                                         Services</a>
                                 </li>
                                 <li>
-                                    <a href="{{ .BaseURL }}/contact"
+                                    <a href="{{ .baseURL }}/contact"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Contact</a>
                                 </li>
                                 <li>
-                                    <a href="{{ .BaseURL }}/privacy-policy"
+                                    <a href="{{ .baseURL }}/privacy-policy"
                                         class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Privacy
                                         Policy</a>
                                 </li>
@@ -197,6 +197,6 @@
 </body>
 <!-- Load dependencies first -->
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
-<script src="{{ .StaticPath }}/assets/js/util.js"></script>
+<script src="{{ .staticPath }}/assets/js/util.js"></script>
 
 </html>

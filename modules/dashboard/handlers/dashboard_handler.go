@@ -11,6 +11,7 @@ import (
 
 type DashboardHandler interface {
 	GetDashboard(c echo.Context) error
+	GetEvents(c echo.Context) error
 }
 
 type dashboardHandler struct {
@@ -23,7 +24,15 @@ func NewDashboardHandler(authService services.AuthService) DashboardHandler {
 
 func (h *dashboardHandler) GetDashboard(c echo.Context) error {
 	return c.Render(http.StatusOK, "dashboard.html", map[string]any{
-		"StaticPath": "/static",
-		"BaseURL":    fmt.Sprintf("%s:%s/user/dashboard", config.AppConfig.AppURL, config.AppConfig.Port),
+		"staticPath": "/static",
+		"baseURL":    fmt.Sprintf("%s:%s/user/dashboard", config.AppConfig.AppURL, config.AppConfig.Port),
+	})
+}
+
+func (h *dashboardHandler) GetEvents(c echo.Context) error {
+	return c.Render(http.StatusOK, "events.html", map[string]any{
+		"staticPath": "/static",
+		"baseURL":    fmt.Sprintf("%s:%s/user/dashboard", config.AppConfig.AppURL, config.AppConfig.Port),
+		"titlePage":  "Events",
 	})
 }

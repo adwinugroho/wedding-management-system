@@ -25,8 +25,8 @@ func NewAuthHandler(authService services.AuthService) AuthHandler {
 
 func (h *authHandler) GetLogin(c echo.Context) error {
 	return c.Render(http.StatusOK, "login.html", map[string]any{
-		"StaticPath": "/static",
-		"BaseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
+		"staticPath": "/static",
+		"baseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 	})
 }
 
@@ -65,7 +65,7 @@ func (h *authHandler) Login(c echo.Context) error {
 
 func (h *authHandler) GetRegister(c echo.Context) error {
 	return c.Render(http.StatusOK, "register.html", map[string]any{
-		"StaticPath": "/static",
-		"BaseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
+		"staticPath": "/static",
+		"baseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 	})
 }

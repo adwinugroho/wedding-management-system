@@ -124,7 +124,8 @@ func serveHTML(c echo.Context) error {
 
 	// Render index.html explicitly
 	return tmpl.ExecuteTemplate(c.Response().Writer, "index.html", map[string]any{
-		"StaticPath": "/static",
+		"staticPath": "/static",
+		"baseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 	})
 }
 
