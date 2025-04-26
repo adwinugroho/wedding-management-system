@@ -119,14 +119,21 @@ func main() {
 func serveHTML(c echo.Context) error {
 	tmpl, err := template.ParseGlob("templates/*.html")
 	if err != nil {
+		logger.LogError("Error while parse template:" + err.Error())
 		return c.String(http.StatusInternalServerError, "Error loading template")
 	}
 
 	// Render index.html explicitly
-	return tmpl.ExecuteTemplate(c.Response().Writer, "index.html", map[string]any{
+	err = tmpl.ExecuteTemplate(c.Response().Writer, "index.html", map[string]any{
 		"staticPath": "/static",
 		"baseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
+		"frontURL":   fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 	})
+	if err != nil {
+		logger.LogError("Error while execute template:" + err.Error())
+		return c.String(http.StatusInternalServerError, "Error loading template")
+	}
+	return nil
 }
 
 type TemplateRenderer struct {

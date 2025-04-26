@@ -1,0 +1,9 @@
+{{ define "scripts" }}
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+<script src="{{ .staticPath }}/assets/js/util.js"></script>
+{{ if eq .page "dashboard" }}
+<script src="{{ .staticPath }}/assets/js/cek.js"></script>
+{{ end }}
+{{ end }}
