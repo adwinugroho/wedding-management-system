@@ -20,6 +20,7 @@ import (
 	routeDashboard "github.com/adwinugroho/wedding-management-system/modules/dashboard"
 	handlerDashboard "github.com/adwinugroho/wedding-management-system/modules/dashboard/handlers"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func init() {
@@ -55,7 +56,7 @@ func main() {
 	}
 
 	var e = echo.New()
-
+	e.Use(middleware.Recover())
 	// Add template renderer
 	renderer := &TemplateRenderer{
 		templates: template.Must(template.ParseGlob("templates/*.html")),

@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/adwinugroho/wedding-management-system/config"
 	"github.com/adwinugroho/wedding-management-system/modules/auth/services"
@@ -35,28 +36,26 @@ func (h *authHandler) Login(c echo.Context) error {
 	password := c.FormValue("password")
 
 	if email == "" || password == "" {
-		// Return HTML response for HTMX
-		// return c.HTML(http.StatusBadRequest, `
-		// 	<div id="errorMessage" class="text-red-500 text-center text-sm mt-2">
-		// 		Email and password are required
-		// 	</div>
-		// `)
-
 		return c.String(http.StatusBadRequest, "Email and password are required.")
 	}
 
-	// user, err := h.authService.Login(c.Request().Context(), email, password)
-	// if err != nil {
-	// 	// Return HTML response for HTMX
-	// 	// return c.HTML(http.StatusUnauthorized, `
-	// 	// 	<div id="errorMessage" class="text-red-500 text-center text-sm mt-2">
-	// 	// 		`+err.(*models.JsonResponse).Message+`
-	// 	// 	</div>
-	// 	// `)
-	// 	return c.String(http.StatusUnauthorized, "Wrong email or password. Please try again.")
-	// }
+	user, token, err := h.authService.Login(c.Request().Context(), email, password)
+	if err != nil {
+		return c.String(http.StatusUnauthorized, "Wrong email or password. Please try again.")
+	}
 
-	// user.Password = nil
+	user.Password = nil
+
+	// Set JWT token in cookie
+	cookie := new(http.Cookie)
+	cookie.Name = "token"
+	cookie.Value = token
+	cookie.Expires = time.Now().Add(24 * time.Hour)
+	cookie.Path = "/"
+	cookie.HttpOnly = true
+	cookie.Secure = true
+	cookie.SameSite = http.SameSiteStrictMode
+	c.SetCookie(cookie)
 
 	// For successful login, return a redirect response
 	c.Response().Header().Set("HX-Redirect", "/user/dashboard")

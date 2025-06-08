@@ -14,6 +14,7 @@ type EnvAppConfig struct {
 	Port        string `mapstructure:"app_port"`
 	AppURL      string `mapstructure:"app_url"`
 	Environment string `mapstructure:"environment"`
+	JWTSecret   string `mapstructure:"jwt_secret"`
 }
 
 type EnvSSOConfig struct {
