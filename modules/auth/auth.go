@@ -9,7 +9,7 @@ func AuthRoutes(e *echo.Echo, authHandler handlers.AuthHandler, authGoogleHandle
 	authGroup := e.Group("/auth")
 	authGroup.POST("/login", authHandler.Login)
 	authGroup.GET("/login", authHandler.GetLogin)
-	// authGroup.POST("/logout", authHandler.Logout)
+	authGroup.POST("/logout", authHandler.Logout)
 	// authGroup.POST("/register", authHandler.Register)
 	authGroup.GET("/register", authHandler.GetRegister)
 

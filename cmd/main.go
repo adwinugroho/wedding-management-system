@@ -96,7 +96,7 @@ func main() {
 	authGoogleHandler := handlerAuth.NewAuthGoogleHandler(authService)
 
 	routeAuth.AuthRoutes(e, authHandler, authGoogleHandler)
-	routeDashboard.DashboardRoutes(e, dashboardHandler)
+	routeDashboard.DashboardRoutes(e, dashboardHandler, authService)
 
 	// Serve static files with proper MIME types
 	e.Static("/static", "static")
