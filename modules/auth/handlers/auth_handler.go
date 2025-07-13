@@ -7,6 +7,7 @@ import (
 
 	"github.com/adwinugroho/wedding-management-system/config"
 	"github.com/adwinugroho/wedding-management-system/internals/logger"
+	"github.com/adwinugroho/wedding-management-system/internals/models"
 	"github.com/adwinugroho/wedding-management-system/modules/auth/services"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
@@ -16,6 +17,7 @@ type AuthHandler interface {
 	Login(c echo.Context) error
 	GetLogin(c echo.Context) error
 	GetRegister(c echo.Context) error
+	Register(c echo.Context) error
 	Logout(c echo.Context) error
 }
 
@@ -91,6 +93,51 @@ func (h *authHandler) GetRegister(c echo.Context) error {
 		"staticPath": "/static",
 		"baseURL":    fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 	})
+}
+
+func (h *authHandler) Register(c echo.Context) error {
+	name := c.FormValue("name")
+	email := c.FormValue("email")
+	password := c.FormValue("password")
+
+	if name == "" || email == "" || password == "" {
+		return c.String(http.StatusBadRequest, "Name, email, and password are required.")
+	}
+
+	newUser := models.User{
+		Name:     name,
+		Email:    email,
+		Password: &password,
+	}
+
+	user, err := h.authService.RegisterUser(c.Request().Context(), newUser)
+	if err != nil {
+		logger.LogError("Error while registering user, cause: " + err.Error())
+		return c.String(http.StatusInternalServerError, "Internal Server Error, Please Contact Customer Service.")
+	}
+
+	// Generate JWT token for the new user
+	user, token, err := h.authService.GenerateJWTToken(c.Request().Context(), *user)
+	if err != nil {
+		logger.LogError("Error while generate JWT token, cause: " + err.Error())
+		return c.String(http.StatusInternalServerError, "Internal Server Error, Please Contact Customer Service.")
+	}
+
+	user.Password = nil
+
+	// Set JWT token in cookie
+	cookie := new(http.Cookie)
+	cookie.Name = "token"
+	cookie.Value = token
+	cookie.Expires = time.Now().Add(24 * time.Hour)
+	cookie.Path = "/"
+	cookie.HttpOnly = true
+	cookie.Secure = true
+	cookie.SameSite = http.SameSiteStrictMode
+	c.SetCookie(cookie)
+
+	c.Response().Header().Set("HX-Redirect", "/user/dashboard")
+	return c.NoContent(http.StatusOK)
 }
 
 func (h *authHandler) Logout(c echo.Context) error {

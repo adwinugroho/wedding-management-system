@@ -18,6 +18,7 @@ type authRepository struct {
 
 type AuthRepository interface {
 	GetUserByEmail(ctx context.Context, email string) (*models.User, error)
+	CreateUser(ctx context.Context, user *models.User) error
 	// TODO: to secure token when user already logout
 	BlacklistToken(ctx context.Context, token string, userID string, expiresAt time.Time) error
 	IsTokenBlacklisted(ctx context.Context, token string) (bool, error)
@@ -50,6 +51,37 @@ func (r *authRepository) GetUserByEmail(ctx context.Context, email string) (*mod
 	}
 
 	return &user, nil
+}
+
+func (r *authRepository) CreateUser(ctx context.Context, user *models.User) error {
+	query := `
+		INSERT INTO users (google_id, provider, name, email, password, avatar_url, role, created_at, updated_at)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		RETURNING id
+	`
+
+	var userID string
+	err := r.DBLive.QueryRow(ctx, query,
+		user.GoogleID,
+		user.Provider,
+		user.Name,
+		user.Email,
+		user.Password,
+		user.AvatarURL,
+		user.Role,
+		user.CreatedAt,
+		user.UpdatedAt,
+	).Scan(&userID)
+
+	if err != nil {
+		logger.LogError("Error while creating user, cause: " + err.Error())
+		return err
+	}
+
+	// Set the generated ID back to the user struct
+	user.ID = userID
+
+	return nil
 }
 
 func (r *authRepository) BlacklistToken(ctx context.Context, token string, userID string, expiresAt time.Time) error {
