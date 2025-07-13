@@ -24,12 +24,17 @@ func NewDashboardHandler(authService services.AuthService) DashboardHandler {
 }
 
 func (h *dashboardHandler) GetDashboard(c echo.Context) error {
+	role, ok := c.Get("user_role").(string)
+	if !ok {
+		return c.String(http.StatusForbidden, "Error, invalid user")
+	}
 	err := c.Render(http.StatusOK, "dashboard.html", map[string]any{
 		"staticPath":     "/static",
 		"baseURL":        fmt.Sprintf("%s:%s/user/dashboard", config.AppConfig.AppURL, config.AppConfig.Port),
 		"frontURL":       fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 		"title":          "Dashboard | Wedding Planner",
 		"page":           "dashboard",
+		"role":           role,
 		"hrefDashboard":  "text-pink-500 hover:text-pink-600",
 		"ihrefDashboard": "opacity-75",
 		"hrefEvent":      "text-blueGray-700 hover:text-blueGray-500",
@@ -43,12 +48,17 @@ func (h *dashboardHandler) GetDashboard(c echo.Context) error {
 }
 
 func (h *dashboardHandler) GetEvents(c echo.Context) error {
+	role, ok := c.Get("user_role").(string)
+	if !ok {
+		return c.String(http.StatusForbidden, "Error, invalid user")
+	}
 	err := c.Render(http.StatusOK, "events.html", map[string]any{
 		"staticPath":     "/static",
 		"baseURL":        fmt.Sprintf("%s:%s/user/dashboard", config.AppConfig.AppURL, config.AppConfig.Port),
 		"frontURL":       fmt.Sprintf("%s:%s", config.AppConfig.AppURL, config.AppConfig.Port),
 		"title":          "Events | Wedding Planner",
 		"page":           "Events",
+		"role":           role,
 		"hrefEvent":      "text-pink-500 hover:text-pink-600",
 		"ihrefEvent":     "opacity-75",
 		"hrefDashboard":  "text-blueGray-700 hover:text-blueGray-500",
