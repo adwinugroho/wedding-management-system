@@ -113,7 +113,8 @@ func main() {
 			return next(c)
 		}
 	})
-
+	e.Use(middleware.Secure())
+	e.Use(middleware.Recover())
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.AppConfig.Port)))
 }
 
