@@ -8,10 +8,9 @@
     <link rel="shortcut icon" href="{{ .staticPath }}/assets/img/favicon.ico" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ .staticPath }}/assets/img/apple-icon.png" />
     <link rel="stylesheet" href="{{ .staticPath }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="{{ .staticPath }}/assets/styles/tailwind.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <script src="https://unpkg.com/htmx-ext-response-targets@2.0.2"></script>
+    <link href="{{ .staticPath }}/assets/css/styles.css" rel="stylesheet">
+    <script src="{{ .staticPath }}/assets/js/htmx.min.js"></script>
+    <script src="{{ .staticPath }}/assets/js/htmx-response-targets.js"></script>
     <title>Register | Wedding Planner</title>
 </head>
 
@@ -26,7 +25,7 @@
                     <i class="text-white fas fa-bars"></i>
                 </button>
             </div>
-            <div class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden"
+            <div class="lg:flex flex-grow items-center lg:bg-opacity-0 lg:shadow-none hidden"
                 id="example-collapse-navbar">
                 <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
                     <li class="flex items-center">
@@ -170,7 +169,7 @@
         </section>
     </main>
 </body>
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="{{ .staticPath }}/assets/js/popper.js"></script>
 <script src="{{ .staticPath }}/assets/js/util.js"></script>
 
 </html>

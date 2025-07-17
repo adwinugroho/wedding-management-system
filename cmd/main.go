@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"text/template"
@@ -56,6 +57,8 @@ func main() {
 	}
 
 	var e = echo.New()
+	// Serve static files with proper MIME types
+	e.Static("/static", "static")
 	e.Use(middleware.Recover())
 	// Add template renderer
 	renderer := &TemplateRenderer{
@@ -98,23 +101,12 @@ func main() {
 	routeAuth.AuthRoutes(e, authHandler, authGoogleHandler)
 	routeDashboard.DashboardRoutes(e, dashboardHandler, authService)
 
-	// Serve static files with proper MIME types
-	e.Static("/static", "static")
-	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(c echo.Context) error {
-			// Set proper content type for CSS files
-			if strings.HasSuffix(c.Path(), ".css") {
-				c.Response().Header().Set(echo.HeaderContentType, "text/css")
-			}
-			// Set proper content type for JavaScript files
-			if strings.HasSuffix(c.Path(), ".js") {
-				c.Response().Header().Set(echo.HeaderContentType, "application/javascript")
-			}
-			return next(c)
-		}
-	})
 	e.Use(middleware.Secure())
-	e.Use(middleware.Recover())
+	// debug css file
+	logger.LogInfo("Checking if static file exists:")
+	if _, err := os.Stat("static/assets/css/styles.css"); err != nil {
+		logger.LogError("styles.css not found or inaccessible: " + err.Error())
+	}
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.AppConfig.Port)))
 }
 

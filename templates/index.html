@@ -8,37 +8,10 @@
     <link rel="shortcut icon" href="{{ .staticPath }}/assets/img/favicon.ico" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ .staticPath }}/assets/img/apple-icon.png" />
     <link rel="stylesheet" href="{{ .staticPath }}/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="{{ .staticPath }}/assets/styles/tailwind.css" />
+    <link href="{{ .staticPath }}/assets/css/styles.css" rel="stylesheet">
+    <script src="{{ .staticPath }}/assets/js/htmx.min.js"></script>
+    <script src="{{ .staticPath }}/assets/js/htmx-response-targets.js"></script>
     <title>Wedding Planner | Your Perfect Day Starts Here</title>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'blueGray': {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        },
-                        'lightBlue': {
-                            400: '#38bdf8',
-                            600: '#0284c7',
-                        },
-                        'emerald': {
-                            400: '#34d399',
-                        },
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 
 <body class="text-blueGray-700 antialiased">
@@ -53,15 +26,15 @@
                     <i class="text-white fas fa-bars"></i>
                 </button>
             </div>
-            <div class="lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden"
+            <div class="lg:flex flex-grow items-center lg:bg-opacity-0 lg:shadow-none hidden"
                 id="example-collapse-navbar">
                 <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
                     <li class="flex items-center">
-                        <a class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                        <a class="lg:text-white px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                             href="{{ .baseURL }}/about">About</a>
                     </li>
                     <li class="flex items-center">
-                        <a class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                        <a class="lg:text-white px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                             href="{{ .baseURL }}/auth/login">Login</a>
                     </li>
                     <li class="flex items-center">
@@ -127,7 +100,7 @@
                             class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                             <div class="px-4 py-5 flex-auto">
                                 <div
-                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-orange-500">
                                     <i class="fas fa-retweet"></i>
                                 </div>
                                 <h6 class="text-xl font-semibold">Full Planning Service</h6>
@@ -584,7 +557,7 @@
         </div>
     </footer>
 </body>
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="{{ .staticPath }}/assets/js/popper.js"></script>
 <script src="{{ .staticPath }}/assets/js/util.js"></script>
 
 </html>
