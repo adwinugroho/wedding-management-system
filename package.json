@@ -1,12 +1,17 @@
 {
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
+  },
   "name": "simple-wedding-management",
   "version": "1.0.0",
-  "description": "A modern web application for wedding planning and management, built with Go and HTMX. This application helps couples plan their wedding by managing budgets, guest lists, wedding rundowns, and finding wedding organizers in the JABODETABEK area.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:css": "tailwindcss -i ./src/css/styles.css -o ./static/assets/css/styles.css --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {}
+  "repository": "https://github.com/adwinugroho/wedding-management-system.git",
+  "author": "adwinugroho <adwinnugroho16@gmail.com>",
+  "license": "MIT"
 }
